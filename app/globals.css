@@ -336,14 +336,12 @@ body::before {
 
 .timeline-year {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
-  margin-top: 12px;
-  transform: rotate(180deg);
+  margin-top: 10px;
+  white-space: nowrap;
 }
 
 /* Project card improved */

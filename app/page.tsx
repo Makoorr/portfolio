@@ -690,9 +690,13 @@ function Contact() {
         flexWrap: "wrap", gap: "12px",
       }}>
         <span>&copy; {new Date().getFullYear()} Aziz Ben Rejeb</span>
-        <span style={{ color: "var(--text-muted)", opacity: 0.5 }}>
-          Built with precision.
-        </span>
+        <a href="mailto:azizbenrejeb@gmail.com" style={{
+          fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--accent)",
+          textDecoration: "none", letterSpacing: "0.04em",
+          transition: "opacity 0.2s",
+        }}>
+          azizbenrejeb@gmail.com
+        </a>
       </div>
     </section>
   );
