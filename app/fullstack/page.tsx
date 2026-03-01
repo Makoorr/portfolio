@@ -289,13 +289,13 @@ function About() {
       <RevealSection>
         <div style={{ maxWidth: "1100px" }}>
           <div style={{
-            fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em",
+            fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.12em",
             color: "var(--accent)", marginBottom: "16px",
           }}>
             ABOUT
           </div>
           <h2 style={{
-            fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700,
+            fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700,
             lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: "24px",
           }}>
             Fullstack developer with a
@@ -347,88 +347,91 @@ function Experience() {
     }}>
       <RevealSection>
         <div style={{
-          fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em",
+          fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.12em",
           color: "var(--accent)", marginBottom: "16px",
         }}>
           EXPERIENCE
         </div>
         <h2 style={{
-          fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700,
+          fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700,
           lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: "48px",
         }}>
           Where I&apos;ve shipped.
         </h2>
       </RevealSection>
 
-      <div style={{
-        display: "flex", flexDirection: "column", gap: "20px",
-        maxWidth: "1100px",
-      }}>
+      <div className="timeline">
         {EXPERIENCES.map((exp, i) => (
-          <RevealSection key={i} delay={i * 80}>
-            <div className="exp-card">
-              <div style={{
-                display: "flex", justifyContent: "space-between", alignItems: "flex-start",
-                gap: "16px", flexWrap: "wrap", marginBottom: "16px",
-              }}>
-                <div>
-                  <div style={{ fontSize: "18px", fontWeight: 700, color: "var(--text)", marginBottom: "4px" }}>
-                    {exp.role}
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{
-                      fontFamily: "var(--font-mono)", fontSize: "13px", fontWeight: 600,
-                      color: exp.color,
-                    }}>
-                      {exp.company}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text-muted)" }}>
-                      {exp.location}
-                    </span>
-                  </div>
-                </div>
-                <span style={{
-                  fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text-muted)",
-                  letterSpacing: "0.04em", flexShrink: 0, paddingTop: "4px",
-                }}>
-                  {exp.period}
-                </span>
+          <RevealSection key={i} delay={i * 100}>
+            <div className="timeline-item" style={{ marginBottom: i < EXPERIENCES.length - 1 ? "8px" : 0 }}>
+              <div className="timeline-marker">
+                <div className="timeline-dot" style={{ color: exp.color, borderColor: exp.color }} />
+                <div className="timeline-year">{exp.period.split("—")[0].trim().split(" ").pop()}</div>
               </div>
-
-              <ul style={{
-                listStyle: "none", padding: 0,
-                display: "flex", flexDirection: "column", gap: "8px",
-              }}>
-                {exp.bullets.map((b, bi) => (
-                  <li key={bi} style={{
-                    display: "flex", alignItems: "flex-start", gap: "10px",
-                    fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6,
+              <div className="exp-card">
+                <div style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "flex-start",
+                  gap: "16px", flexWrap: "wrap", marginBottom: "16px",
+                }}>
+                  <div>
+                    <div style={{ fontSize: "18px", fontWeight: 700, color: "var(--text)", marginBottom: "4px" }}>
+                      {exp.role}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                      <span style={{
+                        fontFamily: "var(--font-mono)", fontSize: "13px", fontWeight: 600,
+                        color: exp.color,
+                      }}>
+                        {exp.company}
+                      </span>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text-muted)" }}>
+                        {exp.location}
+                      </span>
+                    </div>
+                  </div>
+                  <span style={{
+                    fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text-muted)",
+                    letterSpacing: "0.04em", flexShrink: 0, paddingTop: "4px",
                   }}>
-                    <span style={{
-                      color: exp.color, fontSize: "8px", marginTop: "7px", flexShrink: 0,
-                      opacity: 0.7,
-                    }}>
-                      &#9656;
-                    </span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              <div style={{
-                display: "flex", gap: "6px", marginTop: "16px", flexWrap: "wrap",
-              }}>
-                {exp.tags.map((t, ti) => (
-                  <span key={ti} style={{
-                    fontFamily: "var(--font-mono)", fontSize: "10px",
-                    padding: "3px 8px", borderRadius: "4px",
-                    color: exp.color, background: `${exp.color}10`,
-                    border: `1px solid ${exp.color}20`,
-                    letterSpacing: "0.02em",
-                  }}>
-                    {t}
+                    {exp.period}
                   </span>
-                ))}
+                </div>
+
+                <ul style={{
+                  listStyle: "none", padding: 0,
+                  display: "flex", flexDirection: "column", gap: "8px",
+                }}>
+                  {exp.bullets.map((b, bi) => (
+                    <li key={bi} style={{
+                      display: "flex", alignItems: "flex-start", gap: "10px",
+                      fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.6,
+                    }}>
+                      <span style={{
+                        color: exp.color, fontSize: "8px", marginTop: "7px", flexShrink: 0,
+                        opacity: 0.7,
+                      }}>
+                        &#9656;
+                      </span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                <div style={{
+                  display: "flex", gap: "6px", marginTop: "16px", flexWrap: "wrap",
+                }}>
+                  {exp.tags.map((t, ti) => (
+                    <span key={ti} style={{
+                      fontFamily: "var(--font-mono)", fontSize: "10px",
+                      padding: "3px 8px", borderRadius: "4px",
+                      color: exp.color, background: `${exp.color}10`,
+                      border: `1px solid ${exp.color}20`,
+                      letterSpacing: "0.02em",
+                    }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </RevealSection>
@@ -446,13 +449,13 @@ function Projects() {
     }}>
       <RevealSection>
         <div style={{
-          fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em",
+          fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.12em",
           color: "var(--accent)", marginBottom: "16px",
         }}>
           PROJECTS
         </div>
         <h2 style={{
-          fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700,
+          fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700,
           lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: "48px",
         }}>
           Side projects &amp; research.
@@ -461,28 +464,35 @@ function Projects() {
 
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-        gap: "16px", maxWidth: "1100px",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
+        gap: "20px", maxWidth: "1100px",
       }}>
         {PROJECTS.map((p, i) => (
           <RevealSection key={i} delay={i * 100}>
-            <div className="project-card">
+            <div className="project-card-lg">
               <div style={{
-                fontFamily: "var(--font-mono)", fontSize: "24px", fontWeight: 700,
-                color: "var(--emerald)", opacity: 0.3, marginBottom: "12px",
-                lineHeight: 1,
+                display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px",
               }}>
-                {p.icon}
-              </div>
-              <div style={{
-                fontSize: "16px", fontWeight: 700, color: "var(--text)",
-                marginBottom: "10px", lineHeight: 1.3,
-              }}>
-                {p.title}
+                <div style={{
+                  fontFamily: "var(--font-mono)", fontSize: "20px", fontWeight: 700,
+                  color: "var(--emerald)", opacity: 0.4,
+                  width: "36px", height: "36px", display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--emerald-dim)", borderRadius: "8px",
+                  border: "1px solid var(--border)",
+                }}>
+                  {p.icon}
+                </div>
+                <div style={{
+                  fontSize: "17px", fontWeight: 700, color: "var(--text)",
+                  lineHeight: 1.3,
+                }}>
+                  {p.title}
+                </div>
               </div>
               <p style={{
-                fontSize: "13px", color: "var(--text-secondary)", lineHeight: 1.7,
-                marginBottom: "16px",
+                fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.7,
+                marginBottom: "auto", paddingBottom: "20px",
+                position: "relative", zIndex: 1,
               }}>
                 {p.description}
               </p>
@@ -490,7 +500,7 @@ function Projects() {
                 {p.tags.map((t, ti) => (
                   <span key={ti} style={{
                     fontFamily: "var(--font-mono)", fontSize: "10px",
-                    padding: "3px 8px", borderRadius: "4px",
+                    padding: "4px 10px", borderRadius: "4px",
                     color: "var(--text-muted)",
                     background: "var(--surface)",
                     border: "1px solid var(--border)",
@@ -515,13 +525,13 @@ function Skills() {
     }}>
       <RevealSection>
         <div style={{
-          fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em",
+          fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.12em",
           color: "var(--accent)", marginBottom: "16px",
         }}>
           SKILLS
         </div>
         <h2 style={{
-          fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700,
+          fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700,
           lineHeight: 1.3, letterSpacing: "-0.02em", marginBottom: "48px",
         }}>
           Toolbox.
@@ -578,7 +588,7 @@ function Contact() {
 
       <RevealSection>
         <div style={{
-          fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em",
+          fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.12em",
           color: "var(--accent)", marginBottom: "16px",
         }}>
           CONTACT
