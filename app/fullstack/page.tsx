@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Data (Fullstack-oriented) ──────────────────────────────────────────────
 
@@ -183,10 +183,39 @@ function Nav() {
 
 function Hero() {
   const [mounted, setMounted] = useState(false);
+  const orbRef = useRef<HTMLDivElement>(null);
+  const animFrame = useRef<number>(0);
+  const target = useRef({ x: 65, y: 35 });
+  const current = useRef({ x: 65, y: 35 });
+
   useEffect(() => { setMounted(true); }, []);
 
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    target.current = {
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    };
+  }, []);
+
+  useEffect(() => {
+    let running = true;
+    function tick() {
+      if (!running) return;
+      current.current.x += (target.current.x - current.current.x) * 0.04;
+      current.current.y += (target.current.y - current.current.y) * 0.04;
+      if (orbRef.current) {
+        orbRef.current.style.left = `${current.current.x}%`;
+        orbRef.current.style.top = `${current.current.y}%`;
+      }
+      animFrame.current = requestAnimationFrame(tick);
+    }
+    tick();
+    return () => { running = false; cancelAnimationFrame(animFrame.current); };
+  }, []);
+
   return (
-    <section id="top" style={{
+    <section id="top" onMouseMove={handleMouseMove} style={{
       position: "relative", minHeight: "100vh",
       display: "flex", flexDirection: "column", justifyContent: "center",
       padding: "120px clamp(20px, 8vw, 120px) 80px",
@@ -194,14 +223,16 @@ function Hero() {
     }}>
       <div className="grid-bg" />
 
-      <div style={{
-        position: "absolute", top: "15%", right: "10%",
-        width: "clamp(300px, 40vw, 600px)", height: "clamp(300px, 40vw, 600px)",
+      <div ref={orbRef} style={{
+        position: "absolute",
+        width: "clamp(400px, 50vw, 700px)", height: "clamp(400px, 50vw, 700px)",
         borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 70%)",
-        filter: "blur(60px)",
-        animation: mounted ? "fadeIn 2s ease-out" : "none",
+        background: "radial-gradient(circle, rgba(52, 211, 153, 0.1) 0%, rgba(56, 189, 248, 0.05) 30%, rgba(251, 191, 36, 0.02) 50%, transparent 70%)",
+        filter: "blur(80px)",
+        transform: "translate(-50%, -50%)",
         pointerEvents: "none",
+        transition: "opacity 1s ease",
+        opacity: mounted ? 1 : 0,
       }} />
 
       <div style={{
