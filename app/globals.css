@@ -7,9 +7,9 @@
   --surface: #111827;
   --border: rgba(56, 189, 248, 0.08);
   --border-bright: rgba(56, 189, 248, 0.15);
-  --text: #e8edf5;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   --accent: #38bdf8;
   --accent-dim: rgba(56, 189, 248, 0.08);
   --accent-glow: rgba(56, 189, 248, 0.25);
@@ -129,11 +129,11 @@ body::before {
 /* Nav */
 .nav-link {
   position: relative;
-  color: var(--text-muted);
+  color: var(--text);
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 14px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 6px 0;
   transition: color 0.2s;
